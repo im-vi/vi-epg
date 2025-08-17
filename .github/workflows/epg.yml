@@ -1,9 +1,9 @@
-name: Build EPG
+name: Build Custom EPG
 
 on:
   schedule:
     - cron: "0 3 * * *"   # codziennie o 03:00 UTC
-  workflow_dispatch:       # możliwość ręcznego uruchomienia
+  workflow_dispatch:
 
 jobs:
   build:
@@ -24,10 +24,21 @@ jobs:
       - name: Install deps
         run: cd epg && npm install
 
-      - name: Generate EPG
-        run: cd epg && npm run grab -- -c ../channels.xml -o ../guide.xml
+      - name: Generate non-PL EPG
+        run: cd epg && npm run grab -- -c ../channels.xml -o ../world.xml
 
-      - name: Upload artifact to gh-pages
+      - name: Download Polish EPG
+        run: curl -L "https://epg.ovh/pltv.xml" -o pl.xml
+
+      - name: Merge files
+        run: |
+          echo '<?xml version="1.0" encoding="UTF-8"?>' > guide.xml
+          echo '<tv>' >> guide.xml
+          grep -h "<channel " world.xml pl.xml >> guide.xml
+          grep -h "<programme " world.xml pl.xml >> guide.xml
+          echo '</tv>' >> guide.xml
+
+      - name: Publish to GitHub Pages
         run: |
           mkdir -p public
           mv guide.xml public/
@@ -35,5 +46,5 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add public
-          git commit -m "Update EPG"
+          git commit -m "Update EPG" || echo "No changes"
           git push
