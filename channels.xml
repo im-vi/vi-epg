@@ -1,0 +1,15 @@
+<channels>
+  <channel site="pl.tvp.pl" lang="pl" xmltv_id="TVP1.pl" site_id="tvp1">TVP1</channel>
+  <channel site="pl.polsat.pl" lang="pl" xmltv_id="Polsat.pl" site_id="polsat">Polsat</channel>
+  <channel site="pl.tvp.pl" lang="pl" xmltv_id="TVPInfo.pl" site_id="tvpinfo">TVP Info</channel>
+  <channel site="pl.polsat.pl" lang="pl" xmltv_id="PolsatNews.pl" site_id="polsatnews">Polsat News</channel>
+
+  <channel site="bbc.co.uk" lang="en" xmltv_id="BBCNews.uk" site_id="bbcnews">BBC News</channel>
+  <channel site="kan.org.il" lang="he" xmltv_id="KAN11.il" site_id="kan11">KAN 11</channel>
+  <channel site="daserste.de" lang="de" xmltv_id="DasErste.de" site_id="daserste">Das Erste</channel>
+  <channel site="rtl.lu" lang="lb" xmltv_id="RTLLU.lu" site_id="rtlletzebuerg">RTL Lëtzebuerg</channel>
+  <channel site="aljazeera.com" lang="en" xmltv_id="AlJazeeraEnglish.qa" site_id="aljazeeraenglish">Al Jazeera English</channel>
+  <channel site="aljazeera.com" lang="ar" xmltv_id="AlJazeeraArabic.qa" site_id="aljazeeraarabic">Al Jazeera Arabic</channel>
+  <channel site="rtve.es" lang="es" xmltv_id="TVEInternacional.es" site_id="tveinternacional">TVE Internacional</channel>
+  <channel site="rtve.es" lang="es" xmltv_id="Canal24Horas.es" site_id="canal24horas">Canal 24 Horas</channel>
+</channels>
