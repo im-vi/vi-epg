@@ -1,9 +1,9 @@
-name: Build Custom EPG
+name: Generate EPG
 
 on:
   schedule:
-    - cron: "0 3 * * *"   # codziennie o 03:00 UTC
-  workflow_dispatch:
+    - cron: '0 2 * * *'   # codziennie o 2:00 UTC
+  workflow_dispatch:       # możliwość ręcznego uruchomienia
 
 jobs:
   build:
@@ -16,35 +16,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: '18'
 
-      - name: Clone iptv-org/epg
-        run: git clone https://github.com/iptv-org/epg.git epg
-
-      - name: Install deps
-        run: cd epg && npm install
-
-      - name: Generate non-PL EPG
-        run: cd epg && npm run grab -- -c ../channels.xml -o ../world.xml
-
-      - name: Download Polish EPG
-        run: curl -L "https://epg.ovh/pltv.xml" -o pl.xml
-
-      - name: Merge files
+      - name: Install dependencies
         run: |
-          echo '<?xml version="1.0" encoding="UTF-8"?>' > guide.xml
-          echo '<tv>' >> guide.xml
-          grep -h "<channel " world.xml pl.xml >> guide.xml
-          grep -h "<programme " world.xml pl.xml >> guide.xml
-          echo '</tv>' >> guide.xml
+          npm install xml2js node-fetch
+          cd epg && npm install
 
-      - name: Publish to GitHub Pages
+      - name: Generate guide.xml
         run: |
-          mkdir -p public
-          mv guide.xml public/
-          touch public/.nojekyll
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          git add public
-          git commit -m "Update EPG" || echo "No changes"
-          git push
+          node generate.js
+
+      - name: Upload guide.xml
+        uses: actions/upload-artifact@v3
+        with:
+          name: guide
+          path: guide.xml
