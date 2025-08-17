@@ -26,8 +26,7 @@ jobs:
 
       - name: Generate guide.xml
         run: |
-          cd epg
-          npm run grab -- -c ../channels.xml -o ../guide.xml
+          node generate.js
 
       - name: Upload guide.xml
         uses: actions/upload-artifact@v4
