@@ -1,49 +1,36 @@
 name: Generate EPG
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '0 3 * * *'  # codziennie o 03:00 UTC
+    - cron: '0 0 * * *' # codziennie o północy
+  workflow_dispatch:
 
 jobs:
-  build:
+  build-epg:
     runs-on: ubuntu-latest
-
     steps:
-      # 1. Checkout repository
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      # 2. Clone vi-epg repo
-      - name: Clone vi-epg
-        run: git clone https://github.com/iptv-org/epg.git epg
-
-      # 3. Download pltv.xml from internetu
-      - name: Download pltv.xml
-        run: |
-          curl -L -o ./channels.xml https://epg.ovh/pltv.xml
-
-      # 4. Setup Node.js
-      - name: Setup Node.js
+      - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: '18'
 
-      # 5. Install dependencies
       - name: Install dependencies
-        run: |
-          cd epg
-          npm install
+        run: npm install xml2js node-fetch
 
-      # 6. Run grab script
+      - name: Download pltv.xml
+        run: |
+          curl -o channels.xml https://epg.ovh/pltv.xml
+
       - name: Generate guide.xml
         run: |
           cd epg
           npm run grab -- -c ../channels.xml -o ../guide.xml
 
-      # 7. Upload guide.xml
       - name: Upload guide.xml
         uses: actions/upload-artifact@v4
         with:
           name: guide
-          path: guide.xml
+          path: ./guide.xml
