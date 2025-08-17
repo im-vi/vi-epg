@@ -1,8 +1,8 @@
 <channels>
-  <channel site="tvp.pl" lang="pl" xmltv_id="TVP1.pl" site_id="tvp1">TVP1</channel>
-  <channel site="polsat.pl" lang="pl" xmltv_id="Polsat.pl" site_id="polsat">Polsat</channel>
-  <channel site="tvp.pl" lang="pl" xmltv_id="TVPInfo.pl" site_id="tvpinfo">TVP Info</channel>
-  <channel site="polsat.pl" lang="pl" xmltv_id="PolsatNews.pl" site_id="polsatnews">Polsat News</channel>
+  <channel site="epg.ovh" lang="pl" xmltv_id="TVP1.pl" site_id="tvp1">TVP1</channel>
+  <channel site="epg.ovh" lang="pl" xmltv_id="Polsat.pl" site_id="polsat">Polsat</channel>
+  <channel site="epg.ovh" lang="pl" xmltv_id="TVPInfo.pl" site_id="tvpinfo">TVP Info</channel>
+  <channel site="epg.ovh" lang="pl" xmltv_id="PolsatNews.pl" site_id="polsatnews">Polsat News</channel>
 
   <channel site="bbc.co.uk" lang="en" xmltv_id="BBCNews.uk" site_id="bbcnews">BBC News</channel>
   <channel site="kan.org.il" lang="he" xmltv_id="KAN11.il" site_id="kan11">KAN 11</channel>
