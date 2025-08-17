@@ -28,7 +28,7 @@ jobs:
           node generate.js
 
       - name: Upload guide.xml
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: guide
           path: guide.xml
